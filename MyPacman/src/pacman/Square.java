@@ -7,7 +7,7 @@ import java.util.Arrays;
  * The top row and the leftmost column have index 0.
  * @invar|getColumnIndex()>=0
  * @invar | getRowIndex()>=0
- * 
+ * @immutable
  *
  */
 public class Square {
@@ -20,52 +20,62 @@ public class Square {
 	private MazeMap mazemap;
 	private int rowindex;
 	private int columnindex;
+	
 	/**
+	 * returns the mazemap of this square
 	 * @basic
-	 * 
+	 * @creates | mazemapwerk
 	 */
 	public MazeMap getMazeMap() {
 		MazeMap mazemapwerk= mazemap;
 		return mazemapwerk ; 
 		}
+	
 	/**
-	 * 
+	 * returns the rowindex of this square
 	 * @basic
 	 */
 	public int getRowIndex() { return rowindex; }
+	
 	/**
-	 * 
+	 * returns the columnindex of this square
 	 * @basic
 	 */
 	public int getColumnIndex() { return columnindex; }
 	
 	/**
-	 * 
-	 * @inspects 
-	 * 
+	 * returns whether this square is passable or not
+	 * @inspects | this
+	 * @post | result ==getMazeMap().isPassable(getRowIndex(),getColumnIndex())
 	 */
 	public boolean isPassable() { return getMazeMap().isPassable(getRowIndex(),getColumnIndex()); }
+	
+	
 	/**
-	 * 
+	 * Gives back a square for which the mazemap equals the given mazeMap, the roxindex equals the given rowIndex and the columnindex equals the given columnindex
 	 * @post |result!=null
 	 * @post | result.getRowIndex()==rowIndex
 	 * @post | result.getColumnIndex()==columnIndex
 	 * @post | result.getMazeMap()==mazeMap
 	 * @throws IllegalArgumentException| rowIndex<0 ||columnIndex<0 ||rowIndex>=mazeMap.getHeight() ||  columnIndex>=mazeMap.getWidth()
 	 * @throws IllegalArgumentException | mazeMap==null
+	 * @creates | werksquare
+	 * @inspects | mazemap, rowIndex, columnIndex//XXXXXXXXXXX niet zeker
+	 * @mutates | werksquare
 	 */
 	
+	//Moet je hier ook niet checken of een mazemap instanceof Mazemap is??? Moet je hier ook niet checken of mazemap rowindex etc verschillen van null???
 	public static Square of(MazeMap mazeMap, int rowIndex, int columnIndex) {
 		if (rowIndex<0)
 			throw new IllegalArgumentException("rowIndex must be greater of equal to 1");
 		if(columnIndex<0)
 			throw new IllegalArgumentException("columnIndex must be greater of equal to 1");
-		if(columnIndex>mazeMap.getWidth())
+		if(columnIndex>=mazeMap.getWidth())
 			throw new IllegalArgumentException("columnIndex can't be greater than the width of mazemap");
-		if (rowIndex>mazeMap.getHeight())
+		if (rowIndex>=mazeMap.getHeight())
 			throw new IllegalArgumentException("rowIndex can't be greater than height of mazemap");
 		if(mazeMap==null)
-			throw new IllegalArgumentException("maemap can't be null.");
+			throw new IllegalArgumentException("mazemap can't be null.");
 		
 		Square werksquare =new Square();
 		werksquare.columnindex=columnIndex;

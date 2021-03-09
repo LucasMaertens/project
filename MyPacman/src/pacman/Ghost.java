@@ -4,14 +4,21 @@ import java.util.Random;
 
 /**
  * Each instance of this class represents a ghost in a Pac-Man maze.
- * 
+ * @invar | getSquare()!=null
+ * @invar | getDirection()!=null
  */
 
 public class Ghost {
+	
+	/**
+	 * @invar | square!=null
+	 * @invar | direction!=null
+	 */
 	private Square square;
 	private Direction direction;
 	
 	/*
+	 * Return the square where the ghost currently is
 	 * @basic
 	 */
 	public Square getSquare() { return square; }
@@ -26,7 +33,7 @@ public class Ghost {
 	}
 	
 	/**
-	 * 
+	 * Initialises this ghost with the given square and direction
 	 * @throws IllegalArgumentException| square==null||direction==null
 	 * @post | getSquare()==square
 	 * @post | getDirection()==direction
@@ -42,13 +49,15 @@ public class Ghost {
 		
 	}
 	/**
-	 * 
+	 * Sets the ghosts square to the given square
 	 * @throws IllegalArgumentException| (square instanceof Square)==false
 	 * @post| getSquare()==square
+	 * @post | getDirection()==old(getDirection())
 	 * @mutates|this
+	 * @inspects | square //XXXXXXXXXXX niet zeker
 	 */
 	public void setSquare(Square square) {
-		if (square instanceof Square)
+		if (square instanceof Square)//Is dit wel nodig???
 			
 			this.square=square;
 		else 
@@ -56,15 +65,20 @@ public class Ghost {
 	}
 	
 	/**
-	 * 
+	 * Sets the ghosts direction to the given direction
+	 * @throws IllegalArgumentException| (direction instanceof Direction)==false//XXXXXXX is dit nodig???
 	 * @post | getDirection()==direction
+	 * @post | getSquare()==old(getSquare())
 	 * @mutates| this
+	 * @inspects | direction//XXXXXXXXXXX niet zeker
 	 */
 	
 	public void setDirection(Direction direction) { 
-		
+		if (direction instanceof Direction)
+			
 			this.direction=direction;
-		
+		else 
+			throw new IllegalArgumentException("argument must be instance of Direction");
 	}
 	
 	private static int MOVE_FORWARD_PREFERENCE = 10;

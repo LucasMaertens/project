@@ -39,7 +39,7 @@ class PacmanTest {
 		
 		
 		
-		
+		//best nog square getNeighbor testen, ik vertrouw die % niet helemaal, is dit niet gewoon de rest bij deling?
 		assertEquals(new Square().of(mazemap, 0, 0).getMazeMap(),mazemap);
 		assertEquals(new Square().of(mazemap, 1, 0).getRowIndex(),1);
 		assertEquals(new Square().of(mazemap, 0, 1).getRowIndex(),0);

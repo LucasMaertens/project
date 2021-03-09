@@ -14,23 +14,25 @@ public class PacMan {
 	private Square square;
 	
 	/**
-	 * 
+	 * Returns the square where the pacman currently is
 	 * @basic
 	 */
 	public Square getSquare() { 
 		return square;
 	}
 	/*
+	 * Returns the number of lives the pacman has left
 	 * @basic
 	 */
 	public int getNbLives() { return nblives; }
+	
+	
 	/**
-	 * 
-	 * @pthrow IllegalArgumentException | nbLives<=0 || square==null
+	 * Initialises this pacman with the given nbLives and square
+	 * @throw IllegalArgumentException | nbLives<=0 || square==null
 	 * @post | getNbLives()==nbLives
 	 * @post | getSquare()==square
-	 * 	 */
-
+	 */
 	public PacMan(int nbLives, Square square) {
 		if (nbLives<=0)
 			throw new IllegalArgumentException("nblives must be greater than zero");
@@ -40,10 +42,12 @@ public class PacMan {
 		this.square=square;
 	}
 	/**
-	 * 
+	 * sets the square of the pacman to the given square
 	 * @throws IllegalArgumentException| square==null
 	 * @post| getSquare()==square
+	 * @post | getNbLives()==old(getNbLives())
 	 * @mutates|this
+	 * @inspects | square//XXXXXXXXXXX niet zeker
 	 */
 	public void setSquare(Square square) { 
 		if(square==null)
@@ -54,8 +58,10 @@ public class PacMan {
 	/**
 	 * Decreases this Pac-Man character's number of lives by one.
 	 * @post | getNbLives()==old(getNbLives())-1
+	 * @post | getSquare()==old(getSquare())
 	 * @throws RuntimeException | getNbLives()==1
-	 * 
+	 * @mutates | this
+	 * @inspects | this
 	 */
 	public void die() {
 		if (this.nblives==1)

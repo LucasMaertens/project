@@ -9,25 +9,23 @@ package pacman;
 	 
  */
 public class MazeMap {
-	//zelf geschreven
+	
 	/**
 	 * @invar | width>=1
 	 * @invar | height>=1
 	 * @invar | passable!= null
 	 * @invar | passable.length==width*height
 	 */
-	 
 	private int width;
 	private int height;
 	/**
 	 * @representationObject
 	 */
 	private boolean [] passable;
-	//
+
 	/**
 	 * Returns the width (i.e. the number of columns) of this maze map.
 	 * @basic
-	 * @
 	 */
 	public int getWidth() {
 		return width;
@@ -46,7 +44,7 @@ public class MazeMap {
 	 * The square in the top-left corner of the maze has row index 0 and column index 0.
 	 * @throws IllegalArgumentException| rowIndex<0 ||columnIndex<0 ||rowIndex>=getHeight() ||  columnIndex>=getWidth()
 	 * @basic
-	 * @inspects
+	 * @inspects | this, rowIndex, columnIndex//XXXXXXXXXX niet zeker
 	 */
 	public boolean isPassable(int rowIndex, int columnIndex) { 
 		if (rowIndex<0)
@@ -71,8 +69,6 @@ public class MazeMap {
 	 * @post | getHeight()==height
 	 * @post | getWidth()==width
 	 * @post | getHeight()*getWidth()==passable.length
-	 
-	 * 
 	 */
 	public MazeMap(int width, int height, boolean[] passable) {
 		if (width<1)
